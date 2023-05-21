@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <div>Hello from Tailwind</div>
+    <div class="text-3xsl font-bold underline">Hello from Tailwind</div>
   </div>
 </template>
 
