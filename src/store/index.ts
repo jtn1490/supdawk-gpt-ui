@@ -1,36 +1,46 @@
-import { createStore, Store } from 'vuex'
-import { InjectionKey } from 'vue'
+import { createStore, Store, Commit } from 'vuex'
+import { type InjectionKey } from 'vue'
+import supDawkApiClient from '@/utils/httpClients/supdawkApiClient'
+
+interface User {
+  firstName: string
+  lastName: string
+  email: string
+}
 
 interface State {
-  user: string | null
+  user: User
+  authToken: string
 }
 
 export const key: InjectionKey<Store<State>> = Symbol()
 
-export default createStore({
+export default createStore<State>({
   state: {
-    user: null
+    user: {
+      email: '',
+      firstName: '',
+      lastName: ''
+    },
+    authToken: ''
   },
   mutations: {
-    setUser(state: State, user: any) {
+    SET_USER(state: State, user: any) {
       state.user = user
+    },
+    SET_AUTH_TOKEN(state: State, token: string) {
+      state.authToken = token
     }
   },
   actions: {
-    login({ commit }, user: any) {
-      // Here you'd call your login API, but for the sake of this example
-      // we'll just commit the mutation right away.
-      commit('setUser', user)
+    login({ commit }: { commit: Commit }, credentials: { email: string; password: string }) {
+      commit('setUser')
     },
-    logout({ commit }) {
-      commit('setUser', null)
+    logout({ commit }: { commit: Commit }) {
+      commit('setUser')
     }
   },
   getters: {
-    // isLoggedIn: (state: State) => !!state.user
-    isLoggedIn: (state: State) => true
-  },
-  modules: {
-    // If you have additional modules, put them here.
+    isLoggedIn: (state: State) => false
   }
 })

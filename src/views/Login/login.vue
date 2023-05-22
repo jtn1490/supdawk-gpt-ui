@@ -24,7 +24,7 @@
               name="email"
               type="email"
               autocomplete="email"
-              required=""
+              v-model="user.email"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -47,7 +47,7 @@
               name="password"
               type="password"
               autocomplete="current-password"
-              required=""
+              v-model="user.password"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -74,6 +74,33 @@
   </div>
 </template>
 
-<script>
-export default {}
+<script setup lang="ts">
+import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
+
+export default defineComponent({
+  data() {
+    return {
+      user: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  computed: {
+    user(): any {
+      return this.$store.state.user
+    }
+  },
+  methods: {
+    login(): void {}
+  },
+  created() {
+    // const store = useStore<any>()
+    // if (store.state.authToken) {
+    //   // Authenticate user on app reload if auth token exists
+    //   store.dispatch('authenticate')
+    // }
+  }
+})
 </script>

@@ -36,7 +36,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const { requiresAuth } = to.meta
   if (requiresAuth) {
-    // const isAuthenticated = false
     const isLoggedIn = store.getters.isLoggedIn
     if (!isLoggedIn) {
       next('/login')
