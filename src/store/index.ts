@@ -1,6 +1,7 @@
 import { createStore, Store, Commit } from 'vuex'
 import { type InjectionKey } from 'vue'
 import supDawkApiClient from '@/utils/httpClients/supdawkApiClient'
+import jwtDecode from 'jwt-decode'
 
 interface User {
   firstName: string
@@ -33,14 +34,30 @@ export default createStore<State>({
     }
   },
   actions: {
-    login({ commit }: { commit: Commit }, credentials: { email: string; password: string }) {
-      commit('setUser')
+    loginUsernameEmail(
+      { commit }: { commit: Commit },
+      credentials: { email: string; password: string }
+    ) {
+      return supDawkApiClient
+        .post(`/api/v1/authentication/login`, credentials)
+        .then((results: any) => {
+          const decodedToken: any = jwtDecode(results.accessToken)
+          const loggedInUser = {
+            name: decodedToken.name,
+            email: decodedToken.email
+          }
+          commit('SET_USER', loggedInUser)
+          localStorage.setItem('accessToken', results.accessToken)
+          localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser))
+          return
+        })
     },
     logout({ commit }: { commit: Commit }) {
-      commit('setUser')
+      commit('SET_USER', null)
     }
   },
   getters: {
-    isLoggedIn: (state: State) => false
+    isLoggedIn: (state: State) => state.user,
+    loggedInUser: (state: State) => state.user
   }
 })

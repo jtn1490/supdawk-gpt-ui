@@ -15,6 +15,7 @@
     "@headlessui/vue": "^1.7.13",
     "@heroicons/vue": "^2.0.18",
     "axios": "^1.4.0",
+    "jwt-decode": "^3.1.2",
     "vue": "^3.3.2",
     "vue-router": "^4.2.0",
     "vuex": "^4.1.0"

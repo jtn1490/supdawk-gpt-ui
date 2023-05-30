@@ -13,7 +13,7 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
             >Email address</label
@@ -29,7 +29,6 @@
             />
           </div>
         </div>
-
         <div>
           <div class="flex items-center justify-between">
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900"
@@ -55,7 +54,8 @@
 
         <div>
           <button
-            type="submit"
+            type="button"
+            v-on:click="onSubmit()"
             class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Sign in
@@ -74,9 +74,9 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { defineComponent } from 'vue'
-import { useStore } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default defineComponent({
   data() {
@@ -87,20 +87,17 @@ export default defineComponent({
       }
     }
   },
-  computed: {
-    user(): any {
-      return this.$store.state.user
-    }
-  },
   methods: {
-    login(): void {}
-  },
-  created() {
-    // const store = useStore<any>()
-    // if (store.state.authToken) {
-    //   // Authenticate user on app reload if auth token exists
-    //   store.dispatch('authenticate')
-    // }
+    ...mapActions(['loginUsernameEmail']),
+    onSubmit(): void {
+      const { email, password } = this.user
+      this.loginUsernameEmail({
+        email,
+        password
+      }).then(() => {
+        this.$router.push({ name: 'dashboard' })
+      })
+    }
   }
 })
 </script>

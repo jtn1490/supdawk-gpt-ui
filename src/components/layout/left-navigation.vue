@@ -82,7 +82,7 @@
                 alt=""
               />
               <span class="sr-only">Your profile</span>
-              <span aria-hidden="true">Tom Cook</span>
+              <span aria-hidden="true">{{ loggedInUser.email }}</span>
             </a>
           </li>
         </ul>
@@ -91,7 +91,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts">
 import {
   CalendarIcon,
   ChartPieIcon,
@@ -100,18 +100,31 @@ import {
   HomeIcon,
   UsersIcon
 } from '@heroicons/vue/24/outline'
+import { mapGetters, mapActions } from 'vuex'
 
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, count: '5', current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, count: '12', current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, count: '20+', current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false }
-]
-const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
-]
+export default {
+  data() {
+    return {
+      navigation: [
+        { name: 'Dashboard', href: '#', icon: HomeIcon, count: '5', current: true },
+        { name: 'Team', href: '#', icon: UsersIcon, current: false },
+        { name: 'Projects', href: '#', icon: FolderIcon, count: '12', current: false },
+        { name: 'Calendar', href: '#', icon: CalendarIcon, count: '20+', current: false },
+        { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
+        { name: 'Reports', href: '#', icon: ChartPieIcon, current: false }
+      ],
+      teams: [
+        { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
+        { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
+        { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false }
+      ]
+    }
+  },
+  computed: {
+    loggedInUser() {
+      const user: any = localStorage.getItem('loggedInUser')
+      return JSON.parse(user)
+    }
+  }
+}
 </script>
