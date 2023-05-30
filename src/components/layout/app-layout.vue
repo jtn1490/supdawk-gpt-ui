@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import LeftNavigation from './left-navigation.vue'
+import LeftNavigation from "./left-navigation.vue";
 
 export default {
-  name: 'AppLayout',
+  name: "AppLayout",
   components: {
-    LeftNavigation
-  }
-}
+    LeftNavigation,
+  },
+};
 </script>
 
 <style>

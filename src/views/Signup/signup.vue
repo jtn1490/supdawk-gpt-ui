@@ -1,14 +1,6 @@
 <script setup lang="ts"></script>
 
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-white">
-    <body class="h-full">
-    ```
-  -->
   <div class="flex min-h-full flex-1">
     <div
       class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
@@ -20,13 +12,17 @@
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2
+            class="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900"
+          >
             Sign in to your account
           </h2>
           <p class="mt-2 text-sm leading-6 text-gray-500">
             Not a member?
-            {{ ' ' }}
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
+            {{ " " }}
+            <a
+              href="#"
+              class="font-semibold text-indigo-600 hover:text-indigo-500"
               >Start a 14 day free trial</a
             >
           </p>
@@ -36,7 +32,9 @@
           <div>
             <form action="#" method="POST" class="space-y-6">
               <div>
-                <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
+                <label
+                  for="email"
+                  class="block text-sm font-medium leading-6 text-gray-900"
                   >Email address</label
                 >
                 <div class="mt-2">
@@ -52,7 +50,9 @@
               </div>
 
               <div>
-                <label for="password" class="block text-sm font-medium leading-6 text-gray-900"
+                <label
+                  for="password"
+                  class="block text-sm font-medium leading-6 text-gray-900"
                   >Password</label
                 >
                 <div class="mt-2">
@@ -75,13 +75,17 @@
                     type="checkbox"
                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                   />
-                  <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-700"
+                  <label
+                    for="remember-me"
+                    class="ml-3 block text-sm leading-6 text-gray-700"
                     >Remember me</label
                   >
                 </div>
 
                 <div class="text-sm leading-6">
-                  <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
+                  <a
+                    href="#"
+                    class="font-semibold text-indigo-600 hover:text-indigo-500"
                     >Forgot password?</a
                   >
                 </div>
@@ -111,5 +115,5 @@
 </template>
 
 <script>
-export default {}
+export default {};
 </script>

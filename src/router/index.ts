@@ -1,45 +1,46 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Dashboard from '../views/Dashboard/dashboard.vue'
-import Signup from '../views/Signup/signup.vue'
-import Login from '../views/Login/login.vue'
-import store from '../store'
-import supDawkApiClient from '@/utils/httpClients/supdawkApiClient'
+import { createRouter, createWebHistory } from "vue-router";
+import Dashboard from "../views/Dashboard/dashboard.vue";
+import Signup from "../views/Signup/signup.vue";
+import Login from "../views/Login/login.vue";
+import store from "../store";
+import supDawkApiClient from "@/utils/httpClients/supdawkApiClient";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: "/",
+      component: Dashboard,
       children: [
         {
-          path: '/dashboard',
-          name: 'dashboard',
-          component: Dashboard
-        }
+          path: "/dashboard",
+          name: "dashboard",
+          component: Dashboard,
+        },
       ],
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
-      path: '/signup',
-      name: 'signup',
+      path: "/signup",
+      name: "signup",
       component: Signup,
-      meta: { requiresAuth: false }
+      meta: { requiresAuth: false },
     },
     {
-      path: '/login',
-      name: 'login',
+      path: "/login",
+      name: "login",
       component: Login,
-      meta: { requiresAuth: false }
-    }
-  ]
-})
+      meta: { requiresAuth: false },
+    },
+  ],
+});
 
 router.beforeEach(async (to, from, next) => {
-  const { requiresAuth } = to.meta
+  const { requiresAuth } = to.meta;
   if (requiresAuth) {
-    const accessToken = localStorage.getItem('accessToken')
+    const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
-      next('/login')
+      next("/login");
     } else {
       try {
         await supDawkApiClient.post(
@@ -47,18 +48,18 @@ router.beforeEach(async (to, from, next) => {
           {},
           {
             headers: {
-              Authorization: `Bearer ${accessToken}`
-            }
+              Authorization: `Bearer ${accessToken}`,
+            },
           }
-        )
-        next()
+        );
+        next();
       } catch (e) {
-        next('/login')
+        next("/login");
       }
     }
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;

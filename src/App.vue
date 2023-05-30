@@ -8,19 +8,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
+import { computed } from "vue";
+import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
-import LeftNav from './components/layout/left-navigation.vue'
-const store = useStore()
-const isLoggedIn = computed(() => store.getters['isLoggedIn'])
-const route = useRoute()
+import LeftNav from "./components/layout/left-navigation.vue";
+const store = useStore();
+const isLoggedIn = computed(() => store.getters["isLoggedIn"]);
+const route = useRoute();
 
 const showNavigation = computed(() => {
-  const isUnauthenticatedPage = ['login', 'signup'].includes(route.name)
-  return isLoggedIn.value && !isUnauthenticatedPage
-})
+  const isUnauthenticatedPage = ["login", "signup"].includes(route.name);
+  return isLoggedIn.value && !isUnauthenticatedPage;
+});
 </script>
 
 <style scoped>
