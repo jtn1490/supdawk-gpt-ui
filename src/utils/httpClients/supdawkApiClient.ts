@@ -1,5 +1,5 @@
 import { HttpClient } from "./HttpClient";
 
-const supDawkApiClient = new HttpClient("http://localhost:3000");
+const supDawkApiClient: HttpClient = new HttpClient("http://localhost:3000");
 
 export default supDawkApiClient;
